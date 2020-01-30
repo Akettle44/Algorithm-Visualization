@@ -1,0 +1,3 @@
+/home/andrew/projects/c++/algos/CMakeFiles/rebuild_cache.dir
+/home/andrew/projects/c++/algos/CMakeFiles/algotest.dir
+/home/andrew/projects/c++/algos/CMakeFiles/edit_cache.dir

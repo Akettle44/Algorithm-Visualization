@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.0)
+project( ALGOS )
+find_package( OpenCV REQUIRED )
+include_directories(/usr/local/include/opencv4)
+add_executable( algotest algos.cpp )
+target_link_libraries(algotest /usr/local/lib/libopencv_core.so.4.1.1 /usr/local/lib/libopencv_highgui.so.4.1.1  )
