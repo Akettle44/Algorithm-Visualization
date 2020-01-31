@@ -9,50 +9,34 @@ using namespace cv;
 
 int main(int, char**)
 {
-	int height = 1080;
-	int width = 1920;
-	Vec3b color0, color1, color2, color3;
+	int height = 720;
+	int width = 720;
+	//Mat hsv;
+	Vec3b color;
 
-	Mat image1(height, width, CV_8UC3, Scalar(100, 100, 100));
+	Mat hsv(height, width, CV_8UC3);
+	//cvtColor(image1, hsv, cv::COLOR_BGR2HSV);
 
 	/* initialzation */
-	for(int i = 0; i < (height / 10); i++)
+	for(int i = 0; i < width; i++)
 	{
-		for(int j = 0; j < (width / 10); j++)
+		for(int j = 0; j < height; j++)
 		{
-			color0 = image1.at<Vec3b>(Point(i,j));
-			color1 = image1.at<Vec3b>(Point(i + 100,j + 100));
-			color2 = image1.at<Vec3b>(Point(i + 200,j + 200));
-			color3 = image1.at<Vec3b>(Point(i + 300,j + 300));
-
-			color0[0] = 50;
-			color0[1] = 50;
-			color0[2] = 50;
-
-			color1[0] = 120;
-			color1[1] = 120;
-			color1[2] = 120;
-
-			color2[0] = 180;
-			color2[1] = 180;
-			color2[2] = 180;
-
-			color3[0] = 120;
-			color3[1] = 220;
-			color3[2] = 220;
-
-			image1.at<Vec3b>(Point(i,j)) = color0;
-			image1.at<Vec3b>(Point(i + 100,j + 100)) = color1;
-			image1.at<Vec3b>(Point(i + 200,j + 200)) = color2;
-			image1.at<Vec3b>(Point(i + 300,j + 300)) = color3;
+			color = hsv.at<Vec3b>(Point(i,j));
+			color[0] = i / 4;
+			color[1] = 255;
+			color[2] = 255;
+			hsv.at<Vec3b>(Point(i,j)) = color;
 		}
 	}
 
 	namedWindow("Display Window", WINDOW_AUTOSIZE);
-	imshow("Display Window", image1);
+	cvtColor(hsv, hsv, cv::COLOR_HSV2BGR);
+	imshow("Display Window", hsv);
 	waitKey(0);
 
-	image1.release();
+	//image1.release();
+	hsv.release();
 
 	return 0;
 } 
