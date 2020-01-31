@@ -93,6 +93,7 @@ algotest: CMakeFiles/algotest.dir/build.make
 algotest: /usr/local/lib/libopencv_core.so.4.1.1
 algotest: /usr/local/lib/libopencv_highgui.so.4.1.1
 algotest: /usr/local/lib/libopencv_imgproc.so.4.1.1
+algotest: /usr/local/lib/libopencv_videoio.so.4.1.1
 algotest: CMakeFiles/algotest.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/andrew/projects/c++/algos/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable algotest"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/algotest.dir/link.txt --verbose=$(VERBOSE)
