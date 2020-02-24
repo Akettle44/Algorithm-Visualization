@@ -41,7 +41,79 @@ Mat insertion_sort(Mat image, int height, int width)
 	}
 	return image;
 }
+/*
+Mat merge(Mat image, int l, int m, int r)
+{
+	int n1 = m - l + 1; // left array length, includes n 
+	int n2 = r - m;		// right array length 
+	int i, j, k; //left side, right side, new index
+	
+	unsigned long  L[n1]; //initializing arrays with their respective lengths
+	unsigned long  R[n2]; 
 
+	//populating the arrays
+	for(i = 0; i < n1; i++)
+	{
+		L[i] = A[l + i]; 
+	}
+	for(j = 0; j < n2; j++)
+	{
+		R[j] = A[m + 1 + j]; 
+	}
+
+	i = j = 0; //all indexes begin at 0
+	k = l;
+
+	// repopulates the array 
+	while(i < n1 && j < n2)
+	{
+		if(L[i] <= R[j])
+		{
+			A[k] = L[i];
+			i++;
+		}
+		else
+		{
+			A[k] = R[j];
+			j++;
+		}
+		k++;
+	}
+
+	//fills the rest of the array 
+	while(i < n1)
+	{
+		A[k] = L[i];
+		i++; 
+		k++;
+	}
+
+	while(j < n2)
+	{
+		A[k] = R[j];
+		j++; 
+		k++;
+	}
+
+}
+
+Mat mergeSort(Mat image, int l, int r)
+{
+	Mat cop;
+	int m;
+
+	if(r > l)
+	{
+		m = l+(r-l)/2; 		  
+		mergeSort(image, l, m);   // handles lef side of split 
+		mergeSort(image, m+1, r); // handles right side of split 
+
+		cop = merge(image, l, m, r); 	  // called after mergesort breaks each time 
+	}
+	return cop;
+}
+
+*/
 int main(int, char**)
 {
 	int height = 200;
@@ -66,7 +138,13 @@ int main(int, char**)
 		}
 	}
 
+	/*insertion sort test */
 	hsv = insertion_sort(hsv, height, width);
+
+	for(int i = 0; i < height; i++)
+	{
+		mergesort(hsv, 0, hsv.row(0));
+	}
 
 	namedWindow("Display Window", WINDOW_AUTOSIZE);
 	cvtColor(hsv, hsv, cv::COLOR_HSV2BGR);
