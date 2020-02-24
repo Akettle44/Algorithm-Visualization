@@ -11,7 +11,7 @@
 
 using namespace cv;
 
-Mat insertion_sort(Mat image, int height, int width)
+Mat insertion_sort(Mat image, int height, int width, int fps)
 {
 	std::clock_t start;
 	double duration;
@@ -20,9 +20,9 @@ Mat insertion_sort(Mat image, int height, int width)
 	int p;
 	Vec3b key;
 	Vec3b val;
-	//VideoWriter video("akoutput.avi",cv::CAP_FFMPEG,cv::VideoWriter::fourcc('H', '2', '6', '4'),600,Size(width, height),true);
+	VideoWriter video("akoutput.avi",cv::CAP_FFMPEG,cv::VideoWriter::fourcc('H', '2', '6', '4'),fps,Size(width, height),true);
 
-	start = std::clock();
+	start = std::clock(); //start clock 
 	for(int i = 0; i < height; i++)
 	{
 		for(int j = 1; j < width; j++) // needs to start at 1 because arrays begin at 0 
@@ -41,7 +41,7 @@ Mat insertion_sort(Mat image, int height, int width)
 			image.at<Vec3b>(Point(p+1,i)) = key;
 			//cop = image.clone();
 			cvtColor(image, cop, cv::COLOR_HSV2BGR);
-//			video << cop;
+			video << cop;
 			count++;
 		}
 	}
@@ -56,6 +56,12 @@ int main(int, char**)
 	int height = 200;
 	int width = 200;
 	int randscale = 180;
+	int tframes, avgtime, fps = 0;
+
+	tframes = height*width; //approximation, but works well enough at smaller dimensions
+	avgtime = 3.4; //average time caclulated for 200x200, should become a function later
+	fps = (tframes / avgtime); //exceeds opencv capabilities, how to compare these?
+	fps = 1000; 
 	//Mat hsv;
 	Vec3b color;
 
@@ -76,9 +82,8 @@ int main(int, char**)
 			hsv.at<Vec3b>(Point(j,i)) = color;
 		}
 	}
-
 	// insertion sort testing 
-	hsv = insertion_sort(hsv, height, width);
+	hsv = insertion_sort(hsv, height, width, fps);
 	namedWindow("Display Window", WINDOW_AUTOSIZE);
 	cvtColor(hsv, hsv, cv::COLOR_HSV2BGR);
 	imshow("Display Window", hsv);
